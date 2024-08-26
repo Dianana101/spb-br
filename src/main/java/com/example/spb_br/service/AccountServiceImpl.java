@@ -41,9 +41,6 @@ public class AccountServiceImpl implements AccountService {
         AccountDto accountDto = this.findAccountById(accountId);
         this.setAccountState(accountDto);
         Account account = AccountMapper.mapToAccount(accountDto);
-//        if (account.getStatus() != AccountStatus.ACTIVE) {
-//            throw new FailedPurchaseException("Your account is restricted! No purchase available at the moment.");
-//        }
 
         double mainBalance = account.getMainBalance();
         double bonusBalance = account.getBonusBalance();

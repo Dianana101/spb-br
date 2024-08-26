@@ -11,7 +11,6 @@ public class AccountMapper {
     public static AccountDto mapToAccountDto(Account account) {
         return new AccountDto(
                 account.getId(),
-                // account.getUserId(),
                 account.getBonusBalance(),
                 account.getMainBalance(),
                 account.getCurrency(),
@@ -23,7 +22,6 @@ public class AccountMapper {
     public static @NotNull Account mapToAccount(AccountDto accountDto) {
         return new Account(
                 accountDto.getId(),
-                // accountDto.getUserId(),
                 accountDto.getBonusBalance(),
                 accountDto.getMainBalance(),
                 accountDto.getCurrency(),

@@ -13,10 +13,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class AccountServiceImplTest {
+
 	@Autowired
 	private AccountServiceImpl accountServiceImpl;
 
 	private AccountDto accountDto;
+
 	@BeforeEach
 	public void init() {
 		// Изначальная сумма в (А) = 5000 рублей.
@@ -68,7 +70,7 @@ public class AccountServiceImplTest {
 		assertEquals(this.accountDto.getBonusBalance(), 281.57);
 		assertEquals(this.accountDto.getMainBalance(), 2871.0);
 
-		// 7. 8. Online/700
+		// 8. Online/700
 		this.accountDto = accountServiceImpl.getAccountAfterPurchase(accountId, online, 700);
 		assertEquals(this.accountDto.getBonusBalance(), 491.57);
 		assertEquals(this.accountDto.getMainBalance(), 2171.0);
@@ -81,6 +83,7 @@ public class AccountServiceImplTest {
 		FailedPurchaseException exception = assertThrows(FailedPurchaseException.class, () -> {
 					this.accountDto = accountServiceImpl.getAccountAfterPurchase(1l, PurchaseType.ONLINE_PURCHASE, 6000);
 				});
+
 		assertEquals("Not enough money to make a purchase!", exception.getMessage());
 	}
 
@@ -91,7 +94,9 @@ public class AccountServiceImplTest {
 		accountDto.setMainBalance(0);
 		accountDto.setBonusBalance(1000);
 		accountDto = accountServiceImpl.saveAccount(accountDto);
+
 		this.accountDto = accountServiceImpl.getAccountAfterPurchase(accountDto.getId(), PurchaseType.ONLINE_PURCHASE, 1000);
+
 		assertEquals(this.accountDto.getBonusBalance(), 300.0);
 		assertEquals(this.accountDto.getMainBalance(), 0);
 	}
@@ -107,6 +112,7 @@ public class AccountServiceImplTest {
 			accountDto = accountServiceImpl.saveAccount(accountDto);
 			this.accountDto = accountServiceImpl.getAccountAfterPurchase(accountDto.getId(), PurchaseType.ONLINE_PURCHASE, 1000);
 		});
-		assertEquals("No actions available on blocked accounts", exception.getMessage());
+
+		assertEquals("No actions available on blocked account!", exception.getMessage());
 	}
 }

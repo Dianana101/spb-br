@@ -12,17 +12,28 @@ import lombok.*;
 @AllArgsConstructor
 public class AccountDto {
 
-    // используем обычный числовой ид, т.к. h2 не поддерживает UUID
+    /**
+     * Id (используем обычный числовой ид, т.к. h2 не поддерживает UUID)
+     */
     private long id;
 
-    // у счета должна быть привязка к пользователю, но в рамках тестового предполагаем, что юзер один
-    // private long userId;
-
+    /**
+     * Количество денег на бонусном балансе
+     */
     private double bonusBalance;
 
+    /**
+     * Количество денег на основном балансе
+     */
     private double mainBalance;
 
+    /**
+     * Валюта счетов
+     */
     private Currency currency;
 
+    /**
+     * Статус счета
+     */
     private AccountStatus status;
 }

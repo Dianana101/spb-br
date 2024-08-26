@@ -16,7 +16,7 @@ public class AccountController {
     private AccountService accountService;
 
     @PostMapping("/account")
-    public ResponseEntity<AccountDto> createNewAccount(@RequestBody @NonNull AccountDto accountDetails) {
+    public ResponseEntity<AccountDto> saveAccount(@RequestBody @NonNull AccountDto accountDetails) {
         AccountDto savedAccount = accountService.saveAccount(accountDetails);
         return new ResponseEntity<>(savedAccount, HttpStatus.CREATED);
     }

@@ -16,11 +16,7 @@ import lombok.ToString;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // используем обычный числовой ид, тк h2 не поддерживает UUID
     private long id;
-
-    // @Column(name="user_id", nullable = false, updatable = false)
-    // private long userId;
 
     @Column(name = "bonus_balance")
     private double bonusBalance = 0;
@@ -39,6 +35,7 @@ public class Account {
     @ToString.Exclude
     private State<Account> state;
 
+    // реализация State, по умолчанию ставим счету статус Активный
     public Account() {
         this.state = new ActiveState();
     }
@@ -52,6 +49,7 @@ public class Account {
         this.state = new ActiveState();
     }
 
+    // здесь в зависимости от состояния, в котором находится счет будет разрешена либо отклонена операция с ним
     public void performAction() {
         state.performAction(this);
     }
